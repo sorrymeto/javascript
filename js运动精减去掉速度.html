@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body,div,span{
+	margin:0;
+	padding:0;
+	}
+	#div1{
+     width:200px;
+	 height:200px;
+	 background:red;
+	 position:relative;
+	 left:-200px;
+	 top:0;
+		}
+  #div1 span{
+	  width:20px;
+	  height:50px;
+	  background:blue;
+	  position:absolute;
+	  left:200px;
+	  top:75px;
+	  
+	  }
+</style>
+<script type="text/javascript" >
+window.onload=function(){
+	var oDiv=document.getElementById("div1");
+	oDiv.onmousemove=function(){
+		startMove(0);//鼠标移入时，速度10，终点位置为0
+		}
+		oDiv.onmouseout=function(){
+		startMove(-200);//鼠标移出时，速度-10，终点位-200
+		}
+	}
+	var timer=null;//定义一个定时器
+	function startMove(iTarget){
+		clearInterval(timer);//一进来先清除定时器
+		var oDiv=document.getElementById("div1");  
+		timer=setInterval(function(){//每隔30毫秒开个定时器
+		var timer=0;
+		if(oDiv.offsetLeft>iTarget){//判断当前位置的值跟目标位置值得关系、
+		speed=-10;
+		}
+		else{
+			speed=10;
+			}
+		
+		if(oDiv.offsetLeft==iTarget){
+			clearInterval(timer);
+			}
+			else {
+		oDiv.style.left=oDiv.offsetLeft+speed+'px';//offsetleft当前位置的值
+			}
+			},30)
+		}
+
+
+
+
+</script>
+</head>
+
+<body>
+<div id="div1"><span id="share">分享</span></div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<style>
+div {width:250px;height:250px;margin:20px;float:left;background:
+red;filter:alpha(opacity:30);opacity:0.3;}
+</style>
+<script>
+window.onload=function()
+{
+var aDiv=document.getElementsByTagName('div');
+for(var i=0;i<aDiv.length;i++)
+{
+aDiv[i].alpha=30;//作为属性加到物体身上
+aDiv[i].onmouseover=function()
+{
+startMove(this,100);
+};
+aDiv[i].onmouseout=function()
+{
+startMove(this,30);
+};
+}
+};
+
+//var alpha=30;多物体所有东西不能共用 重点
+function startMove(obj,iTarget)
+{
+clearInterval(obj.timer);//关的是物体上的定时器
+obj.timer=setInterval(function(){
+var speed=(iTarget-obj.alpha)/6;//用的是obj上的alpha
+speed=speed>0?Math.ceil(speed):Math.floor(speed);
+if(obj.alpha==iTarget)
+{
+clearInterval(obj.timer);
+}
+else
+{
+obj.alpha+=speed;
+obj.style.filter='alpha(opacity:'+obj.alpha+')';//obj赋予一个样式
+obj.style.opacity=obj.alpha/100;//考虑到多数的浏览器问题
+
+}
+
+},30);
+
+}
+
+</script>
+</head>
+
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>
